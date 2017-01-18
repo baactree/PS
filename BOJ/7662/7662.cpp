@@ -10,8 +10,8 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-priority_queue<pair<int, int> > max_q;
-priority_queue<pair<int, int> > min_q;
+priority_queue<pair<long long, int> > max_q;
+priority_queue<pair<long long, int> > min_q;
 bool check[1000000];
 int main(){
 	int Case;
@@ -26,8 +26,8 @@ int main(){
 		scanf("%d", &k);
 		for(int i=0;i<k;i++){
 			char input[2];
-			int num;
-			scanf("%s%d", input, &num);
+			long long num;
+			scanf("%s%lld", input, &num);
 			if(input[0]=='I'){
 				max_q.push({num, i});
 				min_q.push({-num, i});
@@ -35,7 +35,6 @@ int main(){
 			else{
 				if(num==1){
 					while(!max_q.empty()){
-						int num=max_q.top().first;
 						int idx=max_q.top().second;
 						max_q.pop();
 						if(check[idx]){
@@ -47,7 +46,6 @@ int main(){
 				}
 				else{
 					while(!min_q.empty()){
-						int num=-min_q.top().first;
 						int idx=min_q.top().second;
 						min_q.pop();
 						if(check[idx]){
@@ -57,28 +55,28 @@ int main(){
 						break;
 					}
 				}
+			}	
+			while(!max_q.empty()){
+				int idx=max_q.top().second;
+				if(check[idx]){
+					max_q.pop();
+					continue;
+				}
+				break;
 			}
-		}
-		while(!max_q.empty()){
-			int idx=max_q.top().second;
-			if(check[idx]){
-				max_q.pop();
-				continue;
+			while(!min_q.empty()){
+				int idx=min_q.top().second;
+				if(check[idx]){
+					min_q.pop();
+					continue;
+				}
+				break;
 			}
-			break;
-		}
-		while(!min_q.empty()){
-			int idx=min_q.top().second;
-			if(check[idx]){
-				min_q.pop();
-				continue;
-			}
-			break;
 		}
 		if(max_q.empty()||min_q.empty())
 			printf("EMPTY\n");
 		else
-			printf("%d %d\n", max_q.top().first, -min_q.top().first);
+			printf("%lld %lld\n", max_q.top().first, -min_q.top().first);
 	}
 	return 0;
 }
