@@ -3,19 +3,24 @@ using namespace std;
 int N;
 vector<int> Map[100001];
 bool trip[100001];
-int dp[100001][4];
+int dp[100001][16];
 void search(int here) {
 	trip[here] = true;
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 16; i++)
 		dp[here][i] = i + 1;
 	for (int i = 0; i < Map[here].size(); i++) {
 		int there = Map[here][i];
 		if (!trip[there]) {
 			search(there);
-			dp[here][0] += min(dp[there][1], min(dp[there][2], dp[there][3]));
-			dp[here][1] += min(dp[there][0], min(dp[there][2], dp[there][3]));
-			dp[here][2] += min(dp[there][0], min(dp[there][1], dp[there][3]));
-			dp[here][3] += min(dp[there][0], min(dp[there][1], dp[there][2]));
+			for(int i=0;i<16;i++){
+				int min_val=0x3f3f3f3f;
+				for(int j=0;j<16;j++){
+					if(i==j)
+						continue;
+					min_val=min(min_val, dp[there][j]);
+				}
+				dp[here][i]+=min_val;
+			}
 		}
 	}
 }
@@ -29,7 +34,7 @@ int main() {
 	}
 	search(1);
 	int ans = 1e9;
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 16; i++)
 		ans = min(ans, dp[1][i]);
 	printf("%d\n", ans);
 	return 0;

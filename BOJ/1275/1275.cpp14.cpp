@@ -20,9 +20,9 @@ typedef vector<int>::iterator It;
 const double PI = acos(0.0)*2.0;
 /////////////////////////////////////////////////////
 ll tree[100001];
-int arr[100001];
+ll arr[100001];
 int N, Q;
-void update(int idx, int num) {
+void update(int idx, ll num) {
 	while (idx <= N) {
 		tree[idx] += num;
 		idx += (idx&-idx);
@@ -39,12 +39,12 @@ ll query(int idx) {
 int main() {
 	scanf("%d%d", &N, &Q);
 	for (int i = 1; i <= N; i++) {
-		scanf("%d", &arr[i]);
+		scanf("%lld", &arr[i]);
 		update(i, arr[i]);
 	}
 	for (int i = 0; i < Q; i++) {
-		int x, y, a, b;
-		scanf("%d%d%d%d", &x, &y, &a, &b);
+		ll x, y, a, b;
+		scanf("%lld%lld%lld%lld", &x, &y, &a, &b);
 		if (x > y)
 			swap(x, y);
 		printf("%lld\n", query(y) - query(x - 1));
