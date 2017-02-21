@@ -20,8 +20,9 @@ int solve(int idx){
 	if(ret!=-1)
 		return ret;
 	ret=0;
-	if(str[idx]!='0');
-		ret=solve(idx+1);
+	if(str[idx]=='0')
+		return ret;
+	ret=solve(idx+1);
 	if(idx+1<n&&(str[idx]<'3'||str[idx]=='3'&&str[idx+1]<'5'))
 		ret+=solve(idx+2);
 	return ret;
