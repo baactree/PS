@@ -4,7 +4,7 @@
 //        Created:  2017년 02월 21일 15시 57분 04초
 //       Compiler:  g++ -O2 -std=c++14
 //         Author:  baactree ,  bsj0206@naver.com
-//        Company:  Chonnam National Uiversity
+//        Company:  Chonnam National University
 // 
 // =====================================================================================
 
