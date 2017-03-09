@@ -11,50 +11,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n;
-int arr[100000];
-int g[100000];
-int h[100000];
+int f[100005];
+int g[100005];
+int h[100005];
 int main(){
 	scanf("%d", &n);
-	for(int i=0;i<n;i++)
-		scanf("%d", &arr[i]);
-	bool flag=false;
-	int now=0;
-	for(int i=0;i<n;i++){
-		if(arr[i]<now)
-			flag=true;
-		now=max(now, arr[i]);
-	}
-	if(flag){
-		printf("-1\n");
-		return 0;
-	}
-	int st=1;
-	for(int i=0;i<n;i++){
-		if(i==n-1||arr[i]!=arr[i+1]){
-			if(st<=arr[i]&&arr[i]<=(i+1)){
-				st=i+2;
-				continue;
-			}
-			flag=true;
+	for(int i=1;i<=n;i++)
+		scanf("%d", &f[i]);
+	int m=0;
+	for(int i=1;i<=n;i++){
+		if(f[i]!=f[f[i]]){
+			printf("-1\n");
+			return 0;
 		}
 	}
-	if(flag){
-		printf("-1\n");
-		return 0;
-	}
-	int m=0;
-	for(int i=0;i<n;i++){
-		g[i]=m+1;
-		h[m]=arr[i];
-		if(i==n-1||arr[i]!=arr[i+1])
+	for(int i=1;i<=n;i++){
+		if(!g[f[i]]){
 			m++;
+			g[f[i]]=m;
+			h[m]=f[i];
+		}
 	}
 	printf("%d\n", m);
-	for(int i=0;i<n;i++)
-		printf("%d ", g[i]);
+	for(int i=1;i<=n;i++)
+		printf("%d ", g[f[i]]);
 	printf("\n");
-	for(int i=0;i<m;i++)
+	for(int i=1;i<=m;i++)
 		printf("%d ", h[i]);
 	printf("\n");
 	return 0;
