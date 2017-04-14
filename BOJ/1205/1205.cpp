@@ -21,7 +21,7 @@ int main(){
 		if(s>arr[i])
 			flag=true;
 	}
-	if(!flag){
+	if(n==p&&!flag){
 		printf("-1\n");
 		return 0;
 	}
@@ -33,6 +33,7 @@ int main(){
 		}
 		cnt++;
 	}
+	printf("%d\n", n+1);
 	return 0;
 }
 
