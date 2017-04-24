@@ -8,7 +8,7 @@
            "suppressTaskName": true,
            "isBuildCommand": true,
            "command": "g++",
-           "args" : ["${file}","-O2","-std=c++14","-Wall","-o${fileBasenameNoExtension}"]
+           "args" : ["${file}","-O2","-std=c++11","-Wall","-o${fileBasenameNoExtension}"]
        }, {
            "taskName": "execute",
            "command": "start",
