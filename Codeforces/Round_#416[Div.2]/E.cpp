@@ -10,66 +10,88 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-int n, m, q;
-int mat[10][100000];
-struct Query{
-	int le, ri, idx;
-};
-Query qu[100005];
-int ans[100005];
-int sz;
-int cnt;
-bool trip[10][2];
-bool cmp(const Query &a, const Query &b){
-	int as=a.le/sz;
-	int bs=b.le/sz;
-	if(as==bs)
-		return a.ri<b.ri;
-	return as<bs;
-}
-void dfs(int x, int y){
-	
-}
-void insert(int x){
-	memset(trip, 0, sizeof(trip));
-	if(x==0){
-
+struct Node{
+	int cnt;
+	int l[10], r[10];
+	Node(){
+		cnt=0;
+		for(int i=0;i<10;i++)
+			l[i]=r[i]=0;
 	}
+};
+int n, m, q;
+Node tree[400000];
+int mat[10][100000];
+int par[1000000];
+int pidx;
+int find(int x){
+	if(x==par[x])
+		return x;
+	return par[x]=find(par[x]);
 }
-void erase(int x){
-
+int merge(int x, int y){
+	x=find(x);
+	y=find(y);
+	if(x==y)
+		return 0;
+	par[x]=y;
+	return -1;
+}
+Node mergetree(Node le, Node ri, int idx){
+	Node ret;
+	ret.cnt=le.cnt+ri.cnt;
+	for(int i=0;i<n;i++){
+		par[le.l[i]]=le.l[i];
+		par[le.r[i]]=le.r[i];
+		par[ri.l[i]]=ri.l[i];
+		par[ri.r[i]]=ri.r[i];
+	}
+	for(int i=0;i<n;i++){
+		if(mat[i][idx]==mat[i][idx+1])
+			ret.cnt+=merge(le.r[i], ri.l[i]);
+	}
+	for(int i=0;i<n;i++){
+		ret.l[i]=find(le.l[i]);
+		ret.r[i]=find(ri.r[i]);
+	}
+	return ret;
+}
+void init(int le, int ri, int node){
+	if(le==ri){
+		for(int i=0;i<n;i++)
+			if(i==0||mat[i][le]!=mat[i-1][le]){
+				tree[node].cnt++;
+				tree[node].r[i]=tree[node].l[i]=pidx++;
+			}
+			else
+				tree[node].r[i]=tree[node].l[i]=tree[node].r[i-1];
+		return;
+	}
+	int mid=(le+ri)/2;
+	init(le, mid, node*2);
+	init(mid+1, ri, node*2+1);
+	tree[node]=mergetree(tree[node*2], tree[node*2+1], mid);
+}
+Node query(int le, int ri, int nodele, int noderi, int node){
+	if(le<=nodele&&noderi<=ri)
+		return tree[node];
+	int mid=(nodele+noderi)/2;
+	if(mid<le)
+		return query(le, ri, mid+1, noderi, node*2+1);
+	if(ri<=mid)
+		return query(le, ri, nodele, mid, node*2);
+	return mergetree(query(le, ri, nodele, mid, node*2), query(le, ri, mid+1, noderi, node*2+1), mid);
 }
 int main(){
 	scanf("%d%d%d", &n, &m, &q);
 	for(int i=0;i<n;i++)
 		for(int j=0;j<m;j++)
 			scanf("%d", &mat[i][j]);
-	for(int i=0;i<q;i++){
-		scanf("%d%d", &qu[i].le, &qu[i].ri);
-		qu[i].idx=i;
+	init(0, m-1, 1);
+	while(q--){
+		int a, b;
+		scanf("%d%d", &a, &b);
+		printf("%d\n", query(a-1, b-1, 0, m-1, 1).cnt);
 	}
-	sz=sqrt(m);
-	sort(qu, qu+q, cmp);
-	int le, ri;
-	le=ri=0;
-	insert(0);
-	for(int i=0;i<q;i++){
-		int nle=qu[i].le;
-		int nri=qu[i].ri;
-		for(int j=le;j<nle;j++)
-			erase(j);
-		for(int j=nle;j<le;j++)
-			insert(j);
-		for(int j=ri+1;j<=nri;j++)
-			insert(j);
-		for(int j=nri+1;j<=ri;j++)
-			erase(j);
-		ans[qu[i].idx]=cnt;
-		le=nle;
-		ri=nri;
-	}
-	for(int i=0;i<q;i++)
-		printf("%d\n", ans[i]);
 	return 0;
 }
-
