@@ -12,8 +12,9 @@
 using namespace std;
 int d;
 int main(){
+	freopen("output.txt", "w", stdout);
 	scanf("%d", &d);
-	for(int i=1;i<10000;i++){
+	for(int i=1;i<100000;i++){
 		string rev=to_string(i);
 		reverse(rev.begin(), rev.end());
 		printf("%d : %d\n", i, stoi(rev)-i);
