@@ -4,7 +4,7 @@ struct Node{
     int le,ri;
     int idx;
     Node(){}
-    Node(int le,int ri,int idx):le(le),ri(ri),dx(idx){}
+    Node(int le,int ri,int idx):le(le),ri(ri),idx(idx){}
     bool operator < (const Node &rhs)const{
         return le<rhs.le;
     }
