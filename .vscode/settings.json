@@ -46,6 +46,7 @@
         "xutility": "cpp",
         "array": "cpp",
         "valarray": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "2133.c": "cpp"
     }
 }

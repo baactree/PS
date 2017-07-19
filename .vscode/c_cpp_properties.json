@@ -11,7 +11,8 @@
                 "databaseFilename": "",
                 "path": [
                     "/usr/include",
-                    "/usr/local/include"
+                    "/usr/local/include",
+                    "${workspaceRoot}"
                 ]
             },
             "intelliSenseMode": "clang-x64"
@@ -27,7 +28,8 @@
                 "databaseFilename": "",
                 "path": [
                     "/usr/include",
-                    "/usr/local/include"
+                    "/usr/local/include",
+                    "${workspaceRoot}"
                 ]
             },
             "intelliSenseMode": "clang-x64"
@@ -41,10 +43,12 @@
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": "",
                 "path": [
-                    "C:/MinGW/lib/gcc/mingw32/5.3.0/include"
+                    "C:/MinGW/lib/gcc/mingw32/5.3.0/include",
+                    "${workspaceRoot}"
                 ]
             },
             "intelliSenseMode": "msvc-x64"
         }
-    ]
+    ],
+    "version": 2
 }
