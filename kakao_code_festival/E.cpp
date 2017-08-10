@@ -20,6 +20,8 @@ int get_cnt(int sx, int sy, int fx, int fy){
 }
 int solution(int n, vector<vector<int>> mat) {
 	memset(sum, 0, sizeof(sum));
+	xidx.clear();
+	yidx.clear();
 	xidx.push_back(-1);
 	yidx.push_back(-1);
 	for(int i=0;i<n;i++){
