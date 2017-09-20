@@ -24,47 +24,24 @@ int main(){
 		x>>=1;
 		int acnt, bcnt;
 		acnt=bcnt=0;
-		if(n&1){
-			if(now){
-				if((n/2)&1){
-					bcnt=n/2;
-					acnt=n-bcnt;
-				}
-				else{
-					acnt=n/2;
-					bcnt=n-acnt;
-				}
+		if(now){
+			if((n/2)&1){
+				bcnt=n/2;
+				acnt=n-bcnt;
 			}
 			else{
-				if((n/2)&1){
-					acnt=n/2;
-					bcnt=n-acnt;
-				}
-				else{
-					bcnt=n/2;
-					acnt=n-bcnt;
-				}
+				bcnt=n/2+1;
+				acnt=n-bcnt;
 			}
 		}
 		else{
-			if(now){
-				if((n/2)&1){
-					bcnt=n/2;
-					acnt=n-bcnt;
-				}
-				else{
-					acnt=n/2+1;
-					bcnt=n/2-1;
-				}
+			if((n/2)&1){
+				bcnt=n/2+(r&1?1:-1);
+				acnt=n-bcnt;
 			}
 			else{
-				if((n/2)&1){
-					bcnt=n/2-1;
-					acnt=n-bcnt;
-				}
-				else{
-					bcnt=acnt=n/2;
-				}
+				bcnt=n/2;
+				acnt=n-bcnt;
 			}
 		}
 		int cnt=r&1;
@@ -72,15 +49,7 @@ int main(){
 			int a=it.first;
 			int b=it.second;
 			for(int i=0;i<b;i++){
-				if(!bcnt){
-					nmp[a]++;
-					acnt--;
-				}
-				else if(!acnt){
-					nmp[(1<<r)+a]++;
-					bcnt--;
-				}
-				else if(cnt&1){
+				if(!acnt||(cnt&1&&bcnt)){
 					nmp[(1<<r)+a]++;
 					bcnt--;
 				}
