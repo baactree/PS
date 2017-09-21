@@ -39,7 +39,6 @@ int main(){
 	}
 	x%=t;
 	x=t-x;
-	cout<<x<<endl;
 	while(x--){
 		string next="";
 		int le=0;
