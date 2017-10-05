@@ -69,6 +69,8 @@ int solve(){
 	}
 	if(!(str.back()=='S'||str.back()==']'||str.back()==')'))
 		return -1;
+	if(!(str[0]=='S'||str[0]=='L'||str[0]=='B'))
+		return -1;
 	int b, l, s;
 	b=l=s=0;
 	for(int i=0;i<str.size();i++){

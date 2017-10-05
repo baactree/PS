@@ -17,10 +17,10 @@ int calc(int mod,long long r){
 int main(){
     cin>>input;
     scanf("%d",&k);
-    for(int i=2;i<=k;i++){
+    for(int i=2;i<k;i++){
         if(!prime[i]){
             p.push_back(i);
-            for(int j=i+i;j<=k;j+=i)
+            for(int j=i+i;j<k;j+=i)
                 prime[j]=true;
         }
     }

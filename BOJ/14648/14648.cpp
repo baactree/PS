@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-int tree[4000];
+typedef long long ll;
+ll tree[4000];
 int sz;
 void update(int idx,int val){
     idx+=sz;
@@ -9,10 +10,10 @@ void update(int idx,int val){
         idx/=2;
     }
 }
-int query(int a,int b){
+ll query(int a,int b){
     a+=sz;
     b+=sz;
-    int ret=0;
+    ll ret=0;
     while(a<=b){
         if(a&1)
             ret+=tree[a++];
@@ -41,7 +42,7 @@ int main(){
             int a,b;
             scanf("%d%d",&a,&b);
             a--;b--;
-            printf("%d\n",query(a,b));
+            printf("%lld\n",query(a,b));
             update(a,arr[b]-arr[a]);
             update(b,arr[a]-arr[b]);
             swap(arr[a],arr[b]);
@@ -50,7 +51,7 @@ int main(){
             int a,b,c,d;
             scanf("%d%d%d%d",&a,&b,&c,&d);
             a--;b--;c--;d--;
-            printf("%d\n",query(a,b)-query(c,d));
+            printf("%lld\n",query(a,b)-query(c,d));
         }
     }
     return 0;

@@ -17,21 +17,20 @@ int main(){
 	scanf("%d%d", &n, &k);
 	for(int i=0;i<n;i++){
 		scanf("%d%d", &arr[i].first, &arr[i].second);
-		arr[i].second*=-1;
 	}
-	sort(arr, arr+n);
 	ll ans=0;
 	for(int i=30;i>=0;i--){
-		int nk=k&(~(1<<i));
+		ll now=0;
 		int g=0;
-		ll t=0;
 		for(int j=0;j<n;j++){
-			if((g|arr[j].first)<=nk){
-				g|=arr[j].first;
-				t-=arr[j].second;
+			if((arr[j].first|g)<=k){
+				if(arr[j].first<(1<<i)||!((1<<i)&arr[j].first)){
+					g|=arr[j].first;
+					now+=arr[j].second;
+				}
 			}
 		}
-		ans=max(ans, t);
+		ans=max(ans,now);
 	}
 	printf("%lld\n", ans);
 	return 0;

@@ -13,6 +13,7 @@
 
 
 using namespace std;
+typedef long long ll;
 int input[100];
 int gcd(int a, int b){
 	if (b == 0)
@@ -25,7 +26,7 @@ int main(){
 	while (Case--){
 		int N;
 		cin >> N;
-		int ans = 0;
+		ll ans = 0;
 		for (int i = 0; i < N; i++){
 			scanf("%d", &input[i]);
 		}
@@ -34,7 +35,7 @@ int main(){
 				ans += gcd(input[i], input[j]);
 			}
 		}
-		printf("%d\n", ans);
+		printf("%lld\n", ans);
 	}
 	return 0; 
 }

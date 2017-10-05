@@ -48,15 +48,19 @@ void solve(){
 }
 int main(){
     scanf("%d",&N);
+    assert(N>=1&&N<=1000);
     for(int i=0;i<N;i++)
         for(int j=0;j<N;j++){
             scanf("%d",&mat[i][j]);
+            assert(mat[i][j]>=0&&mat[i][j]<=10);
+            if(i==j&&mat[i][j])
+                assert(false);
             cnt[i]+=mat[i][j];
             M+=mat[i][j];
         }
     M/=2;
     solve();
-    if(ans.size()==0)
+    if(ans.size()==0||M==0)
         printf("-1\n");
     else{
         for(auto i:ans)
